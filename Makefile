@@ -6,7 +6,7 @@
 #    By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/24 17:56:49 by elpastor          #+#    #+#              #
-#    Updated: 2022/05/24 17:57:34 by elpastor         ###   ########.fr        #
+#    Updated: 2022/06/08 16:10:02 by elpastor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = $(addprefix $(DIR_S),$(SOURCES))
 
 OBJS = ${SRCS:.c=.o}
 
-FLAGS = -I $(HEADER) -Wall -Wextra -Werror
+FLAGS = -I $(HEADER) -Wall -Wextra -Werror -pthread
 
 all:	${NAME}
 

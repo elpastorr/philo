@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:45:18 by elpastor          #+#    #+#             */
-/*   Updated: 2022/05/30 18:05:19 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:44:42 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 
 typedef struct s_philo
 {
-	int				id;
 	int				n_eat;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_t		thread;
-}   t_philo;
+}	t_philo;
 
 
 typedef struct s_env {
+	int			id;
 	int			t_die;
 	int			t_sleep;
 	int			t_eat;
@@ -36,6 +36,6 @@ typedef struct s_env {
 	int			max_eat;
 	long int	time;
 	t_philo		*philos;
-}   t_env;
+}	t_env;
 
 #endif
