@@ -29,39 +29,40 @@ void    *routine(void *void_env)
 
 int	main(int ac, char **av)
 {
-    int i;
-    t_env   *env;
+    // int i;
+    // t_env   *env;
 
-    env = malloc(sizeof(t_env));
-    env->id = 0;
-    pthread_mutex_init(&env->write, NULL);
-    i = 0;
-    while (i < 4)
-    {
-        if (pthread_create(&(env[i].thread), NULL, routine, env))
-        {
-            printf("Thread creation error\n");
-            exit(1);
-        }
-        printf("Thread %d has started at %ld\n", i, get_time());
-        // pthread_mutex_lock(&env->write);
-        i++;
-        env->id++;
-        // pthread_mutex_unlock(&env->write);
-    }
-    i = 0;
-    // pthread_mutex_lock(&env->write);
-    env->id = 0;
-    // pthread_mutex_unlock(&env->write);
-    while (i < 4)
-    {
-        if (pthread_join(env[i].thread, NULL))
-        {
-            printf("Thread join error\n");
-            exit(2);
-        }
-        printf("Thread %d has finished at %ld\n", i, get_time());
-        i++;
-        env->id++;
-    }
+    // env = malloc(sizeof(t_env));
+    // env->id = 0;
+    // pthread_mutex_init(&env->write, NULL);
+    // i = 0;
+    // while (i < 4)
+    // {
+    //     if (pthread_create(&(env[i].thread), NULL, routine, env))
+    //     {
+    //         printf("Thread creation error\n");
+    //         exit(1);
+    //     }
+    //     printf("Thread %d has started at %ld\n", i, get_time());
+    //     // pthread_mutex_lock(&env->write);
+    //     i++;
+    //     env->id++;
+    //     // pthread_mutex_unlock(&env->write);
+    // }
+    // i = 0;
+    // // pthread_mutex_lock(&env->write);
+    // env->id = 0;
+    // // pthread_mutex_unlock(&env->write);
+    // while (i < 4)
+    // {
+    //     if (pthread_join(env[i].thread, NULL))
+    //     {
+    //         printf("Thread join error\n");
+    //         exit(2);
+    //     }
+    //     printf("Thread %d has finished at %ld\n", i, get_time());
+    //     i++;
+    //     env->id++;
+    // }
+
 }

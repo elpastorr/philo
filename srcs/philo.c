@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:49:42 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/09 18:29:16 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/10 19:17:24 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,91 @@ int	ft_atoi(const char *nbr)
 	return (nb * neg);
 }
 
+void	print(char *msg, t_philo *philo, int id)
+{
+	int			tmp;
+	long int	time;
+
+	tmp = 0;
+	while (!tmp && !check_death(philo))
+	{
+		pthread_mutex_lock(&(philo->print.mutex));
+		tmp = philo->print.data;
+		if (tmp)
+			philo->print.data = 0;
+		pthread_mutex_unlock(&(philo->print.mutex));
+	}
+	time = get_time();
+	if (!check_death)
+	{
+		printf("%ld : philo %d %s\n", time - philo->arg->time, id, msg);
+		ptread_mutex_lock(&(philo->print.mutex));
+		philo->print.data = 1;
+		pthread_mutex_unlock(&(philo->print.mutex));
+	}
+}
+
+void	sleepy_time(t_philo *philo)
+{
+	long int	time;
+	long int	sleep;
+
+	time = get_time();
+	print("is sleeping", philo, philo->id);
+	while (philo->arg->t_sleep > (get_time() - time) && !check_death(philo))
+	{
+		if (philo->arg->t_sleep - (get_time() - time) > philo->arg->t_die)
+			sleep = philo->arg->t_die;
+		else
+			sleep = philo->arg->t_sleep - (get_time() - time);// "/ 2" ?
+		if (check_death(philo))
+			return ;
+		usleep(sleep);
+	}
+}
+
+void	timetofeast(t_philo *philo)
+{
+	long int	time;
+	long int	eat;
+
+	time = get_time();
+	pthread_mutex_lock(&(philo->last_eat.mutex));
+	philo->last_eat.data = time;
+	pthread_mutex_unlock(&(philo->last_eat.mutex));
+	print("is eating", philo, philo->id);
+	while (philo->arg->t_eat > (get_time() - time) )
+	{
+		if (philo->arg->t_die - (get_time() - time) > philo->arg->t_die)
+			eat = philo->arg->t_die;
+		else
+			eat = philo->arg->t_eat - (get_time() - time); // "/ 2" ?
+		usleep(eat);
+	}
+}
+
 int	check_full(t_philo *philo)
 {
-	int	ret;
+	int	tmp;
 	
-	ret = 0;
+	tmp = 0;
 	pthread_mutex_lock(&(philo->full.mutex));
 	if (philo->full.data == 1)
-		ret = 1;
+		tmp = 1;
 	pthread_mutex_unlock(&(philo->full.mutex));
-	return (ret);
+	return (tmp);
 }
 
 int	check_death(t_philo *philo)
 {
-	int	ret;
+	int	tmp;
 	
-	ret = 0;
+	tmp = 0;
 	pthread_mutex_lock(&(philo->dead.mutex));
 	if (philo->dead.data == 1)
-		ret = 1;
+		tmp = 1;
 	pthread_mutex_unlock(&(philo->dead.mutex));
-	return (ret);
+	return (tmp);
 }
 
 long int	get_time(void)
@@ -80,7 +143,14 @@ void	*routine(void *arg)
 void	ft_error(t_env *env, char *s)
 {
 	printf("%s", s);
-	free(env);
+	if (env)
+	{
+		if (env->arg)
+			free(env->arg)
+		if (env->philos)
+			free(env->philos)
+		free(env);
+	}
 	exit(1);
 }
 
@@ -142,7 +212,7 @@ t_env	*init_env(t_env *env, int ac, char **av)
 	else
 		env->arg->max_eat = -1;
 	check_arg(env, ac);
-	env->time = get_time();
+	env->arg->time = get_time();
 	env->philos = malloc(sizeof(t_philo) * env->arg->n_philo);
 	return (env);
 }

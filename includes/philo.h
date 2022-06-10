@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:45:18 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/09 18:26:15 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:56:12 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_arg {
 	int			t_eat;
 	int			n_philo;
 	int			max_eat;
+	long int	time;
 }	t_arg;
 
 
@@ -49,7 +50,6 @@ typedef struct s_philo
 
 
 typedef struct s_env {
-	long int	time;
 	t_philo		*philos;
 	t_arg		*arg;
 }	t_env;
