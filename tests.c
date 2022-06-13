@@ -27,8 +27,27 @@ void    *routine(void *void_env)
     pthread_mutex_unlock(&env->write);
 }
 
+void	ft_usleep(long int wait, long int time)
+{
+    while (time + wait > get_time())
+        usleep(10);
+}
+
+
 int	main(int ac, char **av)
 {
+    long int    time = get_time();
+    printf("%ld, time = %ld\n", get_time() - time, get_time());
+    ft_usleep(5, get_time());
+    printf("%ld, time = %ld\n", get_time() - time, get_time());
+    ft_usleep(10, get_time());
+    printf("%ld\n", get_time() - time);
+
+    printf("%ld\n", get_time() - time);
+    ft_usleep(5, get_time());
+    printf("%ld\n", get_time() - time);
+    ft_usleep(10, get_time());
+    printf("%ld\n", get_time() - time);
     // int i;
     // t_env   *env;
 
