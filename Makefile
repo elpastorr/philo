@@ -6,7 +6,7 @@
 #    By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/24 17:56:49 by elpastor          #+#    #+#              #
-#    Updated: 2022/06/08 16:10:02 by elpastor         ###   ########.fr        #
+#    Updated: 2022/06/14 19:05:10 by elpastor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,11 @@ DIR_S = srcs/
 
 HEADER = includes/
 
-SOURCES = philo.c 
+SOURCES =	main.c \
+			philo.c \
+			routine.c \
+			checks.c \
+			utils.c
 
 SRCS = $(addprefix $(DIR_S),$(SOURCES))
 
