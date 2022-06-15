@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:52:13 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/14 19:10:04 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:07:18 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void	shut_philos(t_env *env)
 	i = -1;
 	while (++i < env->arg->n_philo)
 		pthread_join(env->philos[i].thread, NULL);
-	ft_error(env, "\n");
+	ft_error(env, "");
 }

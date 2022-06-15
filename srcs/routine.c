@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:55:17 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/14 19:13:44 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:00:13 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print(char *msg, t_philo *philo, int id)
 
 	pthread_mutex_lock(&(philo->arg->print));
 	time = get_time();
-	if (!check_death(philo))
+	if (!check_death(philo) || msg[0] == 'd')
 		printf("%ld : philo %d %s\n", time - philo->arg->time, id, msg);
 	pthread_mutex_unlock(&(philo->arg->print));
 }

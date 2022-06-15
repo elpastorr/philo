@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:00:55 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/14 19:12:41 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:57:13 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	main_thread(t_env *env)
 void	dead_thread(t_env *env, int i)
 {
 	pthread_mutex_unlock(&env->philos[i].last_eat.mutex);
-	if (!check_all_full(env))
-		print("died", &env->philos[i], env->philos[i].id);
 	pthread_mutex_lock(&(env->arg->dead.mutex));
 	env->arg->dead.data = 1;
 	pthread_mutex_unlock(&(env->arg->dead.mutex));
+	if (!check_all_full(env))
+		print("died", &env->philos[i], env->philos[i].id);
 	shut_philos(env);
 }
 
