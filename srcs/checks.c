@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:50:38 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/14 19:13:17 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:58:31 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_arg(t_env *env, int ac)
 {
-	if (env->arg->n_philo < 1)
+	if (env->arg->n_philo < 1 || env->arg->n_philo > 200)
 		ft_error(env, "ERROR : Nombre de philos non valide\n");
 	if (env->arg->t_die < 60)
 		ft_error(env, "ERROR : Time to die non valide\n");
@@ -22,7 +22,7 @@ void	check_arg(t_env *env, int ac)
 		ft_error(env, "ERROR : Time to eat non valide\n");
 	if (env->arg->t_sleep < 60)
 		ft_error(env, "ERROR : Time to sleep non valide\n");
-	if (ac == 6 && env->arg->max_eat < 0)
+	if (ac == 6 && env->arg->max_eat <= 0)
 		ft_error(env, "ERROR : Max eat for philos non valide\n");
 }
 

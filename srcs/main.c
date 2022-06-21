@@ -6,7 +6,7 @@
 /*   By: elpastor <elpastor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:00:55 by elpastor          #+#    #+#             */
-/*   Updated: 2022/06/15 15:57:13 by elpastor         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:58:40 by elpastor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_env	*init_env(t_env *env, int ac, char **av)
 	pthread_mutex_init(&(env->arg->print), NULL);
 	pthread_mutex_init(&(env->arg->dead.mutex), NULL);
 	env->arg->dead.data = 0;
-	pthread_mutex_init(&(env->arg->print), NULL);
 	env->philos = malloc(sizeof(t_philo) * env->arg->n_philo);
 	return (env);
 }
